@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Bloomframe — Gesture Lily</title>
+<link rel="stylesheet" href="css/styles.css" />
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+</head>
+<body>
+
+  <div id="stage">
+    <!-- camera feed, mirrored for a natural selfie view -->
+    <video id="webcam" autoplay playsinline muted></video>
+
+    <!-- the real 3D lily plants render here (Three.js, transparent background) -->
+    <canvas id="three-canvas"></canvas>
+
+    <!-- tiny HTML markers for pinch feedback — no canvas needed for these -->
+    <div class="pinch-dot" id="pinch-left"></div>
+    <div class="pinch-dot" id="pinch-right"></div>
+
+    <!-- loading / permission state -->
+    <div id="loader">
+      <div class="loader-mark">✦</div>
+      <p id="loader-text">Waking up the greenhouse…</p>
+    </div>
+
+    <!-- HUD, styled after the reference capture: Grow / Bloom meters -->
+    <div id="hud">
+      <div class="hud-panel">
+        <div class="metric" id="metric-grow">
+          <span class="metric-label">Grow</span>
+          <div class="metric-bar"><div class="metric-fill" id="fill-grow"></div></div>
+          <span class="metric-value" id="value-grow">0.00</span>
+        </div>
+        <div class="metric" id="metric-bloom">
+          <span class="metric-label">Bloom</span>
+          <div class="metric-bar"><div class="metric-fill fill-bloom" id="fill-bloom"></div></div>
+          <span class="metric-value" id="value-bloom">0.00</span>
+        </div>
+      </div>
+
+      <div class="hud-hint">
+        <span>open your <em>left</em> hand — grow</span>
+        <span>open your <em>right</em> hand — bloom &amp; glow</span>
+        <span><em>both fists</em>, hold — reset</span>
+      </div>
+    </div>
+
+    <div id="toast"></div>
+  </div>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
